@@ -12,12 +12,6 @@ resource "aws_placement_group" "test_pg" {
 
 
 
-
-
-
-
-
-
 data "aws_ami" "server_ami" {
   owners = ["amazon"]
   most_recent = true
@@ -46,6 +40,7 @@ resource "aws_autoscaling_group" "test_asg" {
 #  alb_target_group_arn   = "${var.lb_tg_arn}"
   min_size             = 1
   max_size             = 2
+  desired_capacity          = 2
 #  elb                    = "${var.lb}"
   placement_group     = "${aws_placement_group.test_pg.id}"
   vpc_zone_identifier   = ["${var.tf_public_subnet}"]
